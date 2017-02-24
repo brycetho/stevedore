@@ -5,8 +5,11 @@ for i in ./*; do
   if [ -d "$i" ];
     then
       DDIR=$(basename "$i")
-      docker build -f $DDIR/Dockerfile -t $DDIR . && \
+      cd $DDIR
+      pwd
+      docker build -f Dockerfile -t $DDIR . && \
       docker tag $DDIR $REPO:$DDIR && \
       docker push $REPO;
+      cd ..
   fi;
 done
